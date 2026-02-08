@@ -3,7 +3,14 @@ import Bunting from "@/components/Bunting";
 import FloatingDecorations from "@/components/FloatingDecorations";
 import PartyHat from "@/components/PartyHat";
 import AudioCard from "@/components/AudioCard";
+import PhotoCard from "@/components/PhotoCard";
+import SurpriseLetter from "@/components/SurpriseLetter";
 import birthdayGirl from "@/assets/birthday-girl.png";
+import photo1 from "@/assets/photos/photo1.jpeg";
+import photo2 from "@/assets/photos/photo2.jpeg";
+import photo3 from "@/assets/photos/photo3.jpeg";
+import photo4 from "@/assets/photos/photo4.jpeg";
+import photo5 from "@/assets/photos/photo5.jpeg";
 
 const cards = [
   { id: "message", emoji: "💖", title: "My Message" },
@@ -34,7 +41,7 @@ const Index = () => {
     }
     const audio = new Audio(audioSources[id]);
     audio.volume = 0.6;
-    audio.play().catch(() => {});
+    audio.play().catch(() => { });
     audio.onended = () => setPlaying(null);
     audioRef.current = audio;
     setPlaying(id);
@@ -64,14 +71,12 @@ const Index = () => {
         {/* Date Banner */}
         <div className="date-banner flex items-center gap-3 mb-6">
           <span>❋ ❋</span>
-          <span>8 May ....</span>
+          <span>9 FEB ....</span>
           <span>★</span>
         </div>
 
-        {/* Click Here Button */}
-        <button className="btn-pill mb-8 text-base flex items-center gap-2">
-          Click here My Love ✉️
-        </button>
+        {/* Click Here Button with Surprise Letter */}
+        <SurpriseLetter />
 
         {/* Circular Photo */}
         <section className="relative mb-6">
@@ -87,7 +92,7 @@ const Index = () => {
             style={{ animation: "spin 8s linear infinite" }}
           >
             <span className="text-primary-foreground font-display text-[8px] font-bold leading-tight text-center">
-              HAPPY<br/>BIRTHDAY
+              HAPPY<br />BIRTHDAY
             </span>
           </div>
           {/* Hearts */}
@@ -100,7 +105,7 @@ const Index = () => {
         {/* Name Banner */}
         <div className="flex items-center gap-2 mb-8">
           <span className="text-xl animate-pulse-heart">❤️</span>
-          <div className="date-banner text-lg">My Love</div>
+          <div className="date-banner text-lg">Chithu</div>
           <span className="text-xl animate-pulse-heart" style={{ animationDelay: "0.3s" }}>❤️</span>
         </div>
 
@@ -126,8 +131,47 @@ const Index = () => {
             emoji="🌹"
             title="Click for Flower"
             isPlaying={false}
-            onClick={() => {}}
+            onClick={() => { }}
           />
+        </section>
+
+        {/* Memories / Photo Cards Section */}
+        <section className="w-full px-6 mb-12">
+          <h2 className="font-display text-2xl font-bold text-center text-primary mb-6">Our Memories ✨</h2>
+          <div className="grid grid-cols-3 gap-3">
+            <PhotoCard
+              imageUrl={photo1}
+              caption="Our First Date"
+              description="Thinking back to the day it all started. You looked so beautiful, and I knew right then that you were special. ❤️"
+              className="-rotate-2"
+            />
+            <PhotoCard
+              imageUrl={photo2}
+              caption="Sunset Walks"
+              description="Walking hand in hand as the sky turns golden. Every moment with you is like a dream. 🌅"
+              className="rotate-3 mt-4"
+              imagePadding="p-12"
+            />
+            <PhotoCard
+              imageUrl={photo3}
+              caption="Sweet Moments"
+              description="The little things are what I love most. Your laugh, your smile, and the way you look at me. 🥰"
+              className="rotate-1"
+            />
+            <PhotoCard
+              imageUrl={photo4}
+              caption="Together Always"
+              description="Every second spent with you is a treasure I'll keep forever. 💖"
+              className="-rotate-3 mt-4"
+            />
+            <PhotoCard
+              imageUrl={photo5}
+              caption="Forever Yours"
+              description="To many more birthdays and beautiful memories together. I love you more than words can say. 💕"
+              className="rotate-2"
+              imagePadding="p-12"
+            />
+          </div>
         </section>
 
         {/* Footer Message */}
