@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&family=Quicksand:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=Quicksand:wght@300;400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,41 +6,43 @@
 
 @layer base {
   :root {
-    --background: 340 30% 97%;
-    --foreground: 340 20% 20%;
+    --background: 350 30% 95%;
+    --foreground: 350 30% 18%;
 
-    --card: 340 40% 96%;
-    --card-foreground: 340 20% 25%;
+    --card: 350 50% 94%;
+    --card-foreground: 350 30% 20%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 340 20% 20%;
+    --popover-foreground: 350 30% 18%;
 
-    --primary: 340 65% 65%;
+    --primary: 350 75% 60%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 270 40% 85%;
-    --secondary-foreground: 270 30% 30%;
+    --secondary: 350 60% 85%;
+    --secondary-foreground: 350 50% 25%;
 
-    --muted: 340 20% 92%;
-    --muted-foreground: 340 10% 50%;
+    --muted: 350 25% 90%;
+    --muted-foreground: 350 15% 45%;
 
-    --accent: 20 60% 85%;
-    --accent-foreground: 20 40% 30%;
+    --accent: 30 70% 80%;
+    --accent-foreground: 30 50% 25%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 340 30% 90%;
-    --input: 340 30% 90%;
-    --ring: 340 65% 65%;
+    --border: 350 40% 85%;
+    --input: 350 40% 85%;
+    --ring: 350 75% 60%;
 
-    --radius: 1rem;
+    --radius: 1.5rem;
 
-    --romantic-gradient: linear-gradient(135deg, hsl(340, 60%, 90%), hsl(280, 50%, 90%), hsl(340, 50%, 85%));
-    --card-glow: 0 8px 32px -8px hsla(340, 60%, 60%, 0.25);
-    --hero-gradient: linear-gradient(180deg, hsl(340, 50%, 95%), hsl(280, 40%, 94%), hsl(340, 40%, 96%));
+    --pink-bold: 350 75% 60%;
+    --pink-light: 350 60% 92%;
+    --pink-banner: 350 70% 75%;
+    --coral: 10 70% 65%;
+    --cream: 35 50% 95%;
 
-    --font-display: 'Dancing Script', cursive;
+    --font-display: 'Baloo 2', cursive;
     --font-body: 'Quicksand', sans-serif;
 
     --sidebar-background: 0 0% 98%;
@@ -78,29 +80,50 @@
     font-family: var(--font-body);
   }
 
-  .bg-hero-gradient {
-    background: var(--hero-gradient);
+  .bg-polka {
+    background-image: radial-gradient(circle, hsl(350 60% 82%) 1px, transparent 1px);
+    background-size: 20px 20px;
   }
 
-  .bg-romantic-gradient {
-    background: var(--romantic-gradient);
+  .btn-pill {
+    @apply rounded-full px-6 py-3 font-display font-semibold text-primary-foreground bg-primary
+      transition-all duration-300 hover:scale-105 hover:shadow-lg active:scale-95;
+    box-shadow: 0 4px 14px -4px hsl(350 75% 60% / 0.4);
+  }
+
+  .btn-pill-active {
+    @apply ring-2 ring-offset-2 ring-offset-background;
+    ring-color: hsl(350 75% 60%);
+  }
+
+  .photo-circle {
+    @apply rounded-full border-4 overflow-hidden;
+    border-color: hsl(350 75% 60%);
+    box-shadow: 0 6px 24px -6px hsl(350 60% 50% / 0.35);
+  }
+
+  .date-banner {
+    @apply rounded-full px-8 py-3 font-display font-bold text-lg text-primary-foreground;
+    background: linear-gradient(135deg, hsl(350 75% 60%), hsl(10 70% 65%));
+    box-shadow: 0 4px 14px -4px hsl(350 75% 60% / 0.4);
   }
 
   .card-glow {
-    box-shadow: var(--card-glow);
+    box-shadow: 0 6px 24px -6px hsl(350 60% 60% / 0.25);
   }
 }
 
-@keyframes float-heart {
+/* Animations */
+@keyframes float-up {
   0% {
-    transform: translateY(100vh) scale(0);
+    transform: translateY(110vh) scale(0.7);
     opacity: 0;
   }
   10% {
-    opacity: 1;
+    opacity: 0.8;
   }
   90% {
-    opacity: 0.8;
+    opacity: 0.6;
   }
   100% {
     transform: translateY(-10vh) scale(1);
@@ -108,36 +131,60 @@
   }
 }
 
-@keyframes pulse-soft {
+@keyframes sway {
+  0%, 100% {
+    transform: rotate(-3deg);
+  }
+  50% {
+    transform: rotate(3deg);
+  }
+}
+
+@keyframes bounce-gentle {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes pulse-heart {
   0%, 100% {
     transform: scale(1);
-    opacity: 0.7;
   }
   50% {
-    transform: scale(1.1);
-    opacity: 1;
+    transform: scale(1.15);
   }
 }
 
-@keyframes sparkle {
+@keyframes sparkle-twinkle {
   0%, 100% {
     opacity: 0;
-    transform: scale(0) rotate(0deg);
+    transform: scale(0);
   }
   50% {
     opacity: 1;
-    transform: scale(1) rotate(180deg);
+    transform: scale(1);
   }
 }
 
-.animate-float-heart {
-  animation: float-heart linear infinite;
+.animate-float-up {
+  animation: float-up linear infinite;
 }
 
-.animate-pulse-soft {
-  animation: pulse-soft 2s ease-in-out infinite;
+.animate-sway {
+  animation: sway 3s ease-in-out infinite;
+}
+
+.animate-bounce-gentle {
+  animation: bounce-gentle 2s ease-in-out infinite;
+}
+
+.animate-pulse-heart {
+  animation: pulse-heart 1.5s ease-in-out infinite;
 }
 
 .animate-sparkle {
-  animation: sparkle 3s ease-in-out infinite;
+  animation: sparkle-twinkle 2.5s ease-in-out infinite;
 }
