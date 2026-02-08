@@ -1,6 +1,9 @@
 import { useRef, useState } from "react";
-import FloatingHearts from "@/components/FloatingHearts";
+import Bunting from "@/components/Bunting";
+import FloatingDecorations from "@/components/FloatingDecorations";
+import PartyHat from "@/components/PartyHat";
 import AudioCard from "@/components/AudioCard";
+import birthdayGirl from "@/assets/birthday-girl.png";
 
 const cards = [
   { id: "message", emoji: "💖", title: "My Message" },
@@ -8,14 +11,11 @@ const cards = [
   { id: "secret", emoji: "🥰", title: "A Secret Note" },
 ];
 
-// Using royalty-free placeholder audio URLs — replace with your own audio files
+// Placeholder audio — replace with your own audio file URLs
 const audioSources: Record<string, string> = {
-  message:
-    "https://cdn.pixabay.com/audio/2024/11/29/audio_7e3b8e9a33.mp3",
-  song:
-    "https://cdn.pixabay.com/audio/2022/10/25/audio_582aac4b08.mp3",
-  secret:
-    "https://cdn.pixabay.com/audio/2024/02/07/audio_98eda62506.mp3",
+  message: "https://cdn.pixabay.com/audio/2024/11/29/audio_7e3b8e9a33.mp3",
+  song: "https://cdn.pixabay.com/audio/2022/10/25/audio_582aac4b08.mp3",
+  secret: "https://cdn.pixabay.com/audio/2024/02/07/audio_98eda62506.mp3",
 };
 
 const Index = () => {
@@ -23,19 +23,15 @@ const Index = () => {
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   const handleCardClick = (id: string) => {
-    // If same card is clicked, toggle off
     if (playing === id) {
       audioRef.current?.pause();
       setPlaying(null);
       return;
     }
-
-    // Stop previous
     if (audioRef.current) {
       audioRef.current.pause();
       audioRef.current.currentTime = 0;
     }
-
     const audio = new Audio(audioSources[id]);
     audio.volume = 0.6;
     audio.play().catch(() => {});
@@ -45,23 +41,78 @@ const Index = () => {
   };
 
   return (
-    <div className="relative min-h-screen bg-hero-gradient overflow-hidden">
-      <FloatingHearts />
+    <div className="relative min-h-screen bg-background bg-polka overflow-hidden">
+      <FloatingDecorations />
 
-      <div className="relative z-10 flex flex-col items-center px-6 py-16 max-w-lg mx-auto min-h-screen">
-        {/* Hero */}
-        <section className="flex-1 flex flex-col items-center justify-center text-center mb-12">
-          <span className="text-6xl mb-4 animate-pulse-soft">❤️</span>
-          <h1 className="font-display text-4xl sm:text-5xl font-bold text-primary mb-4 leading-tight">
-            Happy Birthday My Love
+      <div className="relative z-10 flex flex-col items-center max-w-md mx-auto min-h-screen">
+        {/* Bunting Banner */}
+        <Bunting />
+
+        {/* Happy Birthday Title + Party Hat */}
+        <section className="relative flex flex-col items-center mt-2 mb-6 px-4">
+          <div className="absolute -right-2 -top-2 rotate-12">
+            <PartyHat />
+          </div>
+          <h1 className="font-display text-5xl sm:text-6xl font-extrabold text-primary leading-tight tracking-tight text-center">
+            Happy
           </h1>
-          <p className="font-body text-muted-foreground text-lg">
-            This little website is made only for you
-          </p>
+          <h1 className="font-display text-5xl sm:text-6xl font-extrabold text-foreground leading-tight tracking-tight text-center -mt-1">
+            Birthday!
+          </h1>
         </section>
 
-        {/* Cards */}
-        <section className="w-full grid grid-cols-1 gap-4 sm:grid-cols-3 mb-16">
+        {/* Date Banner */}
+        <div className="date-banner flex items-center gap-3 mb-6">
+          <span>❋ ❋</span>
+          <span>8 May ....</span>
+          <span>★</span>
+        </div>
+
+        {/* Click Here Button */}
+        <button className="btn-pill mb-8 text-base flex items-center gap-2">
+          Click here My Love ✉️
+        </button>
+
+        {/* Circular Photo */}
+        <section className="relative mb-6">
+          <div className="photo-circle w-52 h-52 sm:w-60 sm:h-60">
+            <img
+              src={birthdayGirl}
+              alt="Birthday celebration"
+              className="w-full h-full object-cover"
+            />
+          </div>
+          {/* Rotating badge */}
+          <div className="absolute -right-6 bottom-4 w-16 h-16 rounded-full bg-primary flex items-center justify-center animate-spin-slow shadow-lg"
+            style={{ animation: "spin 8s linear infinite" }}
+          >
+            <span className="text-primary-foreground font-display text-[8px] font-bold leading-tight text-center">
+              HAPPY<br/>BIRTHDAY
+            </span>
+          </div>
+          {/* Hearts */}
+          <span className="absolute -left-4 bottom-6 text-2xl animate-pulse-heart">❤️</span>
+          <span className="absolute -right-2 top-4 text-xl animate-pulse-heart" style={{ animationDelay: "0.5s" }}>
+            💕
+          </span>
+        </section>
+
+        {/* Name Banner */}
+        <div className="flex items-center gap-2 mb-8">
+          <span className="text-xl animate-pulse-heart">❤️</span>
+          <div className="date-banner text-lg">My Love</div>
+          <span className="text-xl animate-pulse-heart" style={{ animationDelay: "0.3s" }}>❤️</span>
+        </div>
+
+        {/* Now Playing indicator */}
+        {playing && (
+          <div className="mb-4 px-4 py-2 rounded-full bg-secondary text-secondary-foreground font-body text-sm font-medium animate-bounce-gentle">
+            Now Playing 🎧
+          </div>
+        )}
+
+        {/* Audio Card Buttons */}
+        <section className="w-full px-6 grid grid-cols-2 gap-3 mb-10">
           {cards.map((card) => (
             <AudioCard
               key={card.id}
@@ -71,12 +122,21 @@ const Index = () => {
               onClick={() => handleCardClick(card.id)}
             />
           ))}
+          <AudioCard
+            emoji="🌹"
+            title="Click for Flower"
+            isPlaying={false}
+            onClick={() => {}}
+          />
         </section>
 
-        {/* Footer message */}
-        <section className="text-center pb-12">
-          <p className="font-display text-2xl sm:text-3xl text-primary/80 leading-relaxed">
+        {/* Footer Message */}
+        <section className="text-center px-6 pb-16">
+          <p className="font-display text-2xl text-primary leading-relaxed">
             Thank you for being the most beautiful part of my life 💕
+          </p>
+          <p className="font-body text-muted-foreground text-sm mt-3">
+            Made with ❤️ just for you
           </p>
         </section>
       </div>
