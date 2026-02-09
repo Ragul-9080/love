@@ -11,18 +11,21 @@ import photo2 from "@/assets/photos/photo2.jpeg";
 import photo3 from "@/assets/photos/photo3.jpeg";
 import photo4 from "@/assets/photos/photo4.jpeg";
 import photo5 from "@/assets/photos/photo5.jpeg";
+import photo6 from "@/assets/photos/photo6.jpeg";
 
 const cards = [
   { id: "message", emoji: "💖", title: "My Message" },
   { id: "song", emoji: "🎶", title: "Our Song" },
   { id: "secret", emoji: "🥰", title: "A Secret Note" },
+  { id: "favourite", emoji: "🌹", title: "Always Favourite" },
 ];
 
-// Placeholder audio — replace with your own audio file URLs
+// Local audio files from public/audio
 const audioSources: Record<string, string> = {
-  message: "https://cdn.pixabay.com/audio/2024/11/29/audio_7e3b8e9a33.mp3",
-  song: "https://cdn.pixabay.com/audio/2022/10/25/audio_582aac4b08.mp3",
-  secret: "https://cdn.pixabay.com/audio/2024/02/07/audio_98eda62506.mp3",
+  message: "/audio/ragul my message .mp3",
+  song: "/audio/chithu1.mp3",
+  secret: "/audio/chithu2.mp3",
+  favourite: "/audio/chithu3.mp3",
 };
 
 const Index = () => {
@@ -57,14 +60,14 @@ const Index = () => {
 
         {/* Happy Birthday Title + Party Hat */}
         <section className="relative flex flex-col items-center mt-2 mb-6 px-4">
-          <div className="absolute -right-2 -top-2 rotate-12">
+          <div className="absolute -right-8 -top-6 rotate-12">
             <PartyHat />
           </div>
           <h1 className="font-display text-5xl sm:text-6xl font-extrabold text-primary leading-tight tracking-tight text-center">
             Happy
           </h1>
           <h1 className="font-display text-5xl sm:text-6xl font-extrabold text-foreground leading-tight tracking-tight text-center -mt-1">
-            Birthday!
+            Birthday.
           </h1>
         </section>
 
@@ -127,12 +130,6 @@ const Index = () => {
               onClick={() => handleCardClick(card.id)}
             />
           ))}
-          <AudioCard
-            emoji="🌹"
-            title="Click for Flower"
-            isPlaying={false}
-            onClick={() => { }}
-          />
         </section>
 
         {/* Memories / Photo Cards Section */}
@@ -170,6 +167,12 @@ const Index = () => {
               description="To many more birthdays and beautiful memories together. I love you more than words can say. 💕"
               className="rotate-2"
               imagePadding="p-12"
+            />
+            <PhotoCard
+              imageUrl={photo6}
+              caption="Special Day"
+              description="Every moment with you is a gift I cherish. I'm so lucky to have you. 💖"
+              className="-rotate-1 mt-4"
             />
           </div>
         </section>
